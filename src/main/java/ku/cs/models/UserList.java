@@ -30,8 +30,9 @@ public class UserList {
     //TODO: return true if process is completed, otherwise return false
     public boolean changePassword(String username, String oldPassword, String newPassword) {
         User user = findUserByUsername(username);
-        boolean validateStatus = user.validatePassword(oldPassword);
-        if (validateStatus) {
+        if (user == null) {
+            return false;
+        } else if (user.validatePassword(oldPassword)) {
             user.setPassword(newPassword);
             return true;
         }
