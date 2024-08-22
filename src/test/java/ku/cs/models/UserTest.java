@@ -37,5 +37,7 @@ class UserTest {
     public void testSetPassword() {
         User user1 = new User("user01", "1234");
         assertNotEquals("1234", user1.getPassword()); // should not be equal
+        boolean actual = user1.validatePassword("1234");
+        assertTrue(actual);
     }
 }

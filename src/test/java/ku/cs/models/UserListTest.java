@@ -1,11 +1,17 @@
 package ku.cs.models;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserListTest {
+    UserList userList;
+    @BeforeEach
+    void init() {
+        userList = new UserList();
+    }
 
     @Test
     @DisplayName("User should be found in UserList")
@@ -16,9 +22,13 @@ class UserListTest {
 
         // TODO: assert that UserList found User
 
-        // String expected = "<one of username>";
-        // String actual = user.getUsername();
-        // assertEquals(expected, actual);
+        userList.addUser("Tan", "1234");
+        userList.addUser("Nat", "4321");
+        userList.addUser("Ant", "2134");
+        String expected = "Tan";
+        User user = userList.findUserByUsername("Tan");
+        String actual = user.getUsername();
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -29,7 +39,12 @@ class UserListTest {
         // TODO: change password of one user
 
         // TODO: assert that user can change password
-        // assertTrue(actual);
+        userList.addUser("Tan", "1234");
+        userList.addUser("Nat", "4321");
+        userList.addUser("Ant", "2134");
+        boolean actual = userList.changePassword("Tan", "1234", "1243");
+
+        assertTrue(actual);
     }
 
     @Test
@@ -40,7 +55,12 @@ class UserListTest {
         // TODO: call login() with correct username and password
 
         // TODO: assert that User object is found
-        // assertEquals(expected, actual);
+        userList.addUser("Tan", "1234");
+        userList.addUser("Nat", "4321");
+        userList.addUser("Ant", "2134");
+        User expected = userList.findUserByUsername("Tan");
+        User actual = userList.login("Tan", "1234");
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -51,7 +71,11 @@ class UserListTest {
         // TODO: call login() with incorrect username or incorrect password
 
         // TODO: assert that the method return null
-        // assertNull(actual);
+        userList.addUser("Tan", "1234");
+        userList.addUser("Nat", "4321");
+        userList.addUser("Ant", "2134");
+        User actual = userList.login("Tan", "4321");
+        assertNull(actual);
     }
 
 }
